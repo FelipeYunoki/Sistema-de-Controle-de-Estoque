@@ -1,6 +1,8 @@
 from colorama import Fore, init
 init(autoreset=True)
 
+produtos = []
+
 def menu():
     print(Fore.LIGHTBLACK_EX + "===============================")
     print(Fore.WHITE + "Sistema de Controle de Estoque")
@@ -10,22 +12,37 @@ def menu():
     print(Fore.YELLOW + "3. Buscar Produto")
     print(Fore.YELLOW + "4. Atualizar Produto")
     print(Fore.YELLOW + "5. Excluir Produto")
-    print(Fore.YELLOW + "6. Sair")
+    print(Fore.YELLOW + "0. Sair")
 
 def cadastrar_produto():
-    nome = input(Fore.CYAN + "Digite o nome do produto: ")
-    preco = float(input(Fore.CYAN + "Digite o preço do produto: "))
-    quantidade = int(input(Fore.CYAN + "Digite a quantidade do produto: "))
-    
-    produto = {
-        'nome': nome,
-        'preco': preco,
-        'quantidade': quantidade
-    }
-    
-    produtos.append(produto)
-    print(Fore.GREEN + "Produto cadastrado com sucesso!")
-    
+    while True:
+        print(Fore.LIGHTBLACK_EX + "===============================")
+        nome = input(Fore.CYAN + "Nome do produto: ")
+        preco = float(input(Fore.CYAN + "Preço do produto: "))
+        estoque = int(input(Fore.CYAN + "Quantidade em estoque: "))
+
+        produto = {
+        "nome": nome,
+        "preco": preco,
+        "estoque": estoque}
+
+        produtos.append(produto)
+
+        continua = input(Fore.CYAN + "Deseja cadastrar outro produto(s/n): ")
+
+        if continua.lower() != 's':
+            break 
+
+    #for p in produtos:
+    #    print("\n")
+    #    print(f"{p['nome']} - {p['preco']} - {p['estoque']}")
+
 menu()
+
+opcao = input(Fore.CYAN + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
+
+match opcao:
+    case "1":
+        cadastrar_produto()
 
 #py -m pip install colorama
