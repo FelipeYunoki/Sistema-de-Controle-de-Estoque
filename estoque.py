@@ -67,6 +67,18 @@ def autualizar_produto():
             break
     else:
         print(Fore.RED + "Produto não encontrado.")
+
+def excluir_produto():
+    nome_excluir = input("Digite o nome do produto para excluir: ")
+
+    for produto in produtos:
+        if produto["nome"].lower() == nome_excluir.lower():
+            produtos.remove(produto)
+            print("Produto excluído com sucesso!")
+            break
+    else:
+        print("Produto não encontrado.")
+
 menu()
 
 opcao = input(Fore.CYAN + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
@@ -81,6 +93,12 @@ while True:
             buscar_produto()
         case "4":
             autualizar_produto()
+        case "5":
+            excluir_produto()
+        case "0":
+            break
+        case _:
+            print(Fore.RED + "Opção inválida! Digite um número entre 1 e 5.")
 
     opcao = input(Fore.CYAN + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
 #py -m pip install colorama
