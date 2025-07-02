@@ -54,6 +54,19 @@ def buscar_produto():
         if not encontrado:
             print(Fore.RED + "Produto não encontrado.")
 
+def autualizar_produto():
+    nome_atualizar = input("Digite o nome do produto para atualizar: ")
+
+    for produto in produtos:
+        if produto["nome"].lower() == nome_atualizar.lower():
+            print(Fore.GREEN + "Produuto encontrado")
+            novo_preco = float(input("Novo preço: "))
+            novo_estoque = int(input("Novo estoque: "))
+            produto["preco"] = novo_preco
+            produto["estoque"] = novo_estoque
+            break
+    else:
+        print(Fore.RED + "Produto não encontrado.")
 menu()
 
 opcao = input(Fore.CYAN + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
@@ -66,6 +79,8 @@ while True:
             lista_produtos()
         case "3":
             buscar_produto()
+        case "4":
+            autualizar_produto()
 
     opcao = input(Fore.CYAN + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
 #py -m pip install colorama
