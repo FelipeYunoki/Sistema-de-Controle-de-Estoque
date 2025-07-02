@@ -37,8 +37,22 @@ def lista_produtos():
     if produtos == []:
         print(Fore.RED + "Nenhum produto cadastrado")
     else:
-        for p in produtos:
-            print(Fore.GREEN + f"{p['nome']} - R${p['preco']} - {p['estoque']} unidade")
+        for produto in produtos:
+            print(Fore.GREEN + f"{produto['nome']} - R${produto['preco']} - {produto['estoque']} unidade")
+
+def buscar_produto():
+    nome_busca = input("Digite o nome do produto: ") 
+
+    encontrado = False
+    for produto in produtos:
+        if produto["nome"].lower() == nome_busca.lower():
+            print(Fore.GREEN + "Produto encontrado")
+            print(Fore.YELLOW + f"{produto['nome']} - R${produto['preco']} - {produto['estoque']} unidade")
+            encontrado = True
+            break
+
+        if not encontrado:
+            print(Fore.RED + "Produto não encontrado.")
 
 menu()
 
@@ -50,5 +64,8 @@ while True:
             cadastrar_produto()
         case "2":
             lista_produtos()
+        case "3":
+            buscar_produto()
+
     opcao = input(Fore.CYAN + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
 #py -m pip install colorama
