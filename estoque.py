@@ -8,7 +8,7 @@ def menu():
     print(Fore.WHITE + "Sistema de Controle de Estoque")
     print(Fore.LIGHTBLACK_EX + "===============================")
     print(Fore.YELLOW + "1. Cadastrar Produto")
-    print(Fore.YELLOW + "2. Listar Produtos")
+    print(Fore.YELLOW + "2. Visualizar estoque")
     print(Fore.YELLOW + "3. Buscar Produto")
     print(Fore.YELLOW + "4. Atualizar Produto")
     print(Fore.YELLOW + "5. Excluir Produto")
@@ -16,10 +16,9 @@ def menu():
 
 def cadastrar_produto():
     while True:
-        print(Fore.LIGHTBLACK_EX + "===============================")
-        nome = input(Fore.CYAN + "Nome do produto: ")
-        preco = float(input(Fore.CYAN + "Preço do produto: "))
-        estoque = int(input(Fore.CYAN + "Quantidade em estoque: "))
+        nome = input(Fore.WHITE + "Nome do produto: ")
+        preco = float(input(Fore.WHITE + "Preço do produto: "))
+        estoque = int(input(Fore.WHITE + "Quantidade em estoque: "))
 
         produto = {
         "nome": nome,
@@ -28,12 +27,12 @@ def cadastrar_produto():
 
         produtos.append(produto)
 
-        continua = input(Fore.CYAN + "Deseja cadastrar outro produto(s/n): ")
+        continua = input(Fore.WHITE + "Deseja cadastrar outro produto(s/n): ")
 
         if continua.lower() != 's':
             break 
 
-def lista_produtos():
+def visualizar_estoque():
     if produtos == []:
         print(Fore.RED + "Nenhum produto cadastrado")
     else:
@@ -41,25 +40,25 @@ def lista_produtos():
             print(Fore.GREEN + f"{produto['nome']} - R${produto['preco']} - {produto['estoque']} unidade")
 
 def buscar_produto():
-    nome_busca = input("Digite o nome do produto: ") 
+    nome_busca = input(Fore.WHITE + "Digite o nome do produto: ") 
 
     encontrado = False
     for produto in produtos:
         if produto["nome"].lower() == nome_busca.lower():
-            print(Fore.GREEN + "Produto encontrado")
+            print(Fore.GREEN + "Produto encontrado.")
             print(Fore.YELLOW + f"{produto['nome']} - R${produto['preco']} - {produto['estoque']} unidade")
             encontrado = True
             break
 
-        if not encontrado:
-            print(Fore.RED + "Produto não encontrado.")
+    if not encontrado:
+        print(Fore.RED + "Produto não encontrado.")
 
 def autualizar_produto():
-    nome_atualizar = input("Digite o nome do produto para atualizar: ")
+    nome_atualizar = input(Fore.WHITE + "Digite o nome do produto para atualizar: ")
 
     for produto in produtos:
         if produto["nome"].lower() == nome_atualizar.lower():
-            print(Fore.GREEN + "Produuto encontrado")
+            print(Fore.GREEN + "Produto encontrado.")
             novo_preco = float(input("Novo preço: "))
             novo_estoque = int(input("Novo estoque: "))
             produto["preco"] = novo_preco
@@ -69,26 +68,26 @@ def autualizar_produto():
         print(Fore.RED + "Produto não encontrado.")
 
 def excluir_produto():
-    nome_excluir = input("Digite o nome do produto para excluir: ")
+    nome_excluir = input(Fore.WHITE + "Digite o nome do produto para excluir: ")
 
     for produto in produtos:
         if produto["nome"].lower() == nome_excluir.lower():
             produtos.remove(produto)
-            print("Produto excluído com sucesso!")
+            print(Fore.GREEN + "Produto excluído com sucesso!")
             break
     else:
-        print("Produto não encontrado.")
+        print(Fore.RED + "Produto não encontrado.")
 
 menu()
 
-opcao = input(Fore.CYAN + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
+opcao = input(Fore.WHITE + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
 
 while True:
     match opcao:
         case "1":
             cadastrar_produto()
         case "2":
-            lista_produtos()
+            visualizar_estoque()
         case "3":
             buscar_produto()
         case "4":
@@ -98,7 +97,7 @@ while True:
         case "0":
             break
         case _:
-            print(Fore.RED + "Opção inválida! Digite um número entre 1 e 5.")
+            print(Fore.RED + "Opção inválida! Digite um número entre 1 e 5 ou 0 para sair: ")
 
-    opcao = input(Fore.CYAN + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
+    opcao = input(Fore.WHITE + "\nEscoha uma opção(1, 2, 3, 4, 5 ou 0 para sair): ")
 #py -m pip install colorama
